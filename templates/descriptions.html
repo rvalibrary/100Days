@@ -1,0 +1,47 @@
+{% load static %}
+
+<script>
+
+{% for reading in readings %}
+  var description_{{reading.id}} =
+    '<div class="dialog">'+
+      '<div class="dialog_text_div">'+
+        '<h1 class="titleHeading">{{reading.book_title|escapejs}}</h1>'+
+        '<h4 class="authorHeading">By: {{reading.author|escapejs}}</h2>'+
+
+        '<table class="dtable_heading" style="width: 100%;">' +
+            '<tbody>' +
+            '<tr>' +
+              '<td class="dtable_firstcol">Reader:</td>' +
+              '<td>{{reading.reader_name|escapejs}}</td>' +
+            '</tr>' +
+            '<tr>' +
+              '<td class="dtable_firstcol">Date:</td>' +
+              '<td>{{reading.date}}</td>' +
+            '</tr>' +
+            '<tr>' +
+              '<td class="dtable_firstcol">Time:</td>' +
+              '<td>{{reading.start_time}}-{{reading.end_time}}</td>' +
+            '</tr>' +
+            '<tr>' +
+              '<td class="dtable_firstcol">Location:</td>' +
+              '<td>{{reading.location_name_or_address|escapejs}}</td>' +
+            '</tr>' +
+
+          '</tbody>' +
+        '</table>' +
+        '<div>'+
+          '<div style="text-align: justify;">' +
+          '<h4 style="margin: 5px 0;">Why did you choose this book?</h4>'+
+            '<p style="padding-right: 10px; margin-top: 0;">{{reading.reason|escapejs}}</p>'+
+          '<h4 style="margin: 5px 0;">Fun Fact</h4>'+
+            '<p style="padding-right: 10px; margin-top: 0;">{{reading.fun_fact|escapejs}}</p>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+ //dialog_text_div
+      '<div class="dialog_image_div">'+
+        '<a href="{%if reading.synopsis_url %}{{reading.synopsis_url}}{%else%}#{%endif%}" target="_blank"><img src="{{reading.image_url|escapejs}}" style="" alt="book cover"></a>' +
+      '</div>'+ //dialog_image_div
+    '</div>';
+{% endfor %}
+</script>
